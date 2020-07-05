@@ -19,3 +19,5 @@ module DoubleTake
     ENV.delete("DEPENDENCY_NEXT_OVERRIDE")
   end
 end
+
+DoubleTake::Clean.new.register_command
