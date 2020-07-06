@@ -28,6 +28,8 @@ module DoubleTake
     end
 
     def exec(_command, args)
+      return if !GEMFILE_NEXT_LOCK.file?
+
       if args.first != "clean"
         Bundler.ui.error("Unknown subcommand: '#{args.first}'")
         return

@@ -4,11 +4,13 @@ module DoubleTake
   class Hook < Bundler::Plugin::API
     def register
       self.class.hook("before-install-all") do
+        next if !GEMFILE_NEXT_LOCK.file?
+
         @previous_lockfile = Bundler.default_lockfile.read
       end
 
       self.class.hook("after-install-all") do
-        next if ENV["DEPENDENCY_NEXT_OVERRIDE"]
+        next if ENV["DEPENDENCY_NEXT_OVERRIDE"] || !GEMFILE_NEXT_LOCK.file?
 
         current_definition = Bundler.definition
         unlock = current_definition.instance_variable_get(:@unlock)
