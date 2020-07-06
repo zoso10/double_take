@@ -1,28 +1,43 @@
 # DoubleTake
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/double_take`. To experiment with that code, run `bin/console` for an interactive prompt.
+DoubleTake is a [bundler plugin](https://bundler.io/v2.0/guides/bundler_plugins.html) that doubly bundles gems from multiple lockfiles for projects that are using a [dual boot strategy](https://www.youtube.com/watch?v=I-2Xy3RS1ns&t=368s).
 
-TODO: Delete this and the text above, and describe your gem
+The motivation for this tool was for instances where both sets of gems are needed and the gems are decided at boot time. For example: docker images that are built with the gem bundle in a pipeline and can't determine which gem set to use until the docker image is run. A single docker image is useful for debugging as you don't have to guess which image had which gem set.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'double_take'
+plugin "double_take"
 ```
+
+_NOTE_: We use the `plugin` method, not `gem`.
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install double_take
-
 ## Usage
 
-TODO: Write usage instructions here
+The plugin is installed with an initial `bundle`. Then, every subsequent `bundle` will install all gems from both `Gemfile.lock` and `Gemfile_next.lock`.
+
+_NOTE_: This plugin does not generate a `Gemfile_next.lock`, keep both lockfiles in sync over gem bumps, nor does it implement any strategy for bifurcating the `Gemfile` to load different gems. For those reasons, this plugin pairs really well with [`bootboot`](https://github.com/Shopify/bootboot). For more info on dual booting I recommend reading its `README`.
+
+As mentioned in the `bootboot` plugin the `Gemfile` needs to be bifurcated with the environment variable `DEPENDENCIES_NEXT`.
+
+
+### Clean
+The `bundle clean` command is useful for removing unused gems on your system. The problem is that the default `bundle clean` only respects the gem set in `Gemfile.lock` which will remove any differing gems in `Gemfile_next.lock`. To avoid this, you can use the command:
+
+    $ bundle double_take clean
+
+It accepts all options that bundler's clean command does:
+
+    $ bundle double_take clean --help
+    $ bundle double_take clean --dry-run
+    $ bundle double_take clean --force
+
 
 ## Development
 
@@ -32,7 +47,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/double_take. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/zoso10/double_take. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
