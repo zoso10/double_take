@@ -4,11 +4,11 @@ require "bundler"
 require "pathname"
 
 require "double_take/clean"
+require "double_take/hook"
 require "double_take/version"
 
 module DoubleTake
   GEMFILE = Bundler.default_gemfile
-  GEMFILE_LOCK = Pathname("#{GEMFILE}.lock")
   GEMFILE_NEXT_LOCK = Pathname("#{GEMFILE}_next.lock")
 
   def with_dependency_next_override
@@ -21,3 +21,4 @@ module DoubleTake
 end
 
 DoubleTake::Clean.new.register_command
+DoubleTake::Hook.new.register
