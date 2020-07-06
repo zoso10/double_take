@@ -4,7 +4,7 @@ module DoubleTake
   class Clean < Bundler::Plugin::API
     module Patch
       def next_specs
-        ENV["DEPENDENCY_NEXT_OVERRIDE"] = "1"
+        ENV["DEPENDENCIES_NEXT"] = "1"
         deps = if Bundler.settings[:cache_all_platforms]
                  dependencies
                else
@@ -15,7 +15,7 @@ module DoubleTake
           .resolve
           .materialize(deps)
       ensure
-        ENV.delete("DEPENDENCY_NEXT_OVERRIDE")
+        ENV.delete("DEPENDENCIES_NEXT")
       end
 
       def specs

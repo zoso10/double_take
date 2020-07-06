@@ -11,9 +11,9 @@ RSpec.describe DoubleTake do
     end
 
     it "sets an env var" do
-      expect(ENV["DEPENDENCY_NEXT_OVERRIDE"]).not_to eq("1")
+      expect(ENV["DEPENDENCIES_NEXT"]).not_to eq("1")
       with_dependency_next_override do
-        expect(ENV["DEPENDENCY_NEXT_OVERRIDE"]).to eq("1")
+        expect(ENV["DEPENDENCIES_NEXT"]).to eq("1")
       end
     end
 
@@ -23,7 +23,7 @@ RSpec.describe DoubleTake do
           raise
         end
       end.to raise_error(RuntimeError)
-      expect(ENV["DEPENDENCY_NEXT_OVERRIDE"]).not_to eq("1")
+      expect(ENV["DEPENDENCIES_NEXT"]).not_to eq("1")
     end
   end
 end

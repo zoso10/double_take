@@ -12,11 +12,11 @@ module DoubleTake
   GEMFILE_NEXT_LOCK = Pathname("#{GEMFILE}_next.lock")
 
   def with_dependency_next_override
-    ENV["DEPENDENCY_NEXT_OVERRIDE"] = "1"
+    ENV["DEPENDENCIES_NEXT"] = "1"
 
     yield
   ensure
-    ENV.delete("DEPENDENCY_NEXT_OVERRIDE")
+    ENV.delete("DEPENDENCIES_NEXT")
   end
 end
 
