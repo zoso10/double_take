@@ -1,6 +1,6 @@
 # double_take
 
-## 0.1.1 (unreleased)
+## 0.1.1
 - Add necessary `plugins.rb`
 
 ## 0.1.0
