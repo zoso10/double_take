@@ -1,6 +1,6 @@
 # double_take
 
-## 0.1.2 (unreleased)
+## 0.1.2
 - Fix helper method
 
 ## 0.1.1
