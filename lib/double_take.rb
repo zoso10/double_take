@@ -11,7 +11,7 @@ module DoubleTake
   GEMFILE = Bundler.default_gemfile
   GEMFILE_NEXT_LOCK = Pathname("#{GEMFILE}_next.lock")
 
-  def with_dependency_next_override
+  def self.with_dependency_next
     ENV["DEPENDENCIES_NEXT"] = "1"
 
     yield

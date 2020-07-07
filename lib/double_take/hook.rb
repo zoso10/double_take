@@ -15,7 +15,7 @@ module DoubleTake
         current_definition = Bundler.definition
         unlock = current_definition.instance_variable_get(:@unlock)
 
-        with_dependency_next_override do
+        DoubleTake.with_dependency_next do
           next_definition = Bundler::Definition
             .build(GEMFILE, GEMFILE_NEXT_LOCK, unlock)
 
