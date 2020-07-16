@@ -18,7 +18,11 @@ module DoubleTake
   ensure
     ENV.delete("DEPENDENCIES_NEXT")
   end
-end
 
-DoubleTake::Clean.new.register_command
-DoubleTake::Hook.new.register
+  def self.load
+    DoubleTake::Clean.new.register_command
+    hook = DoubleTake::Hook.new
+    hook.bundle_next unless Bundler::Plugin.installed?("double_take")
+    hook.register
+  end
+end

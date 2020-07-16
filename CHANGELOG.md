@@ -1,5 +1,10 @@
 # double_take
 
+## 0.2.0 (unreleased)
+- Remove registering command and hooks at file loadtime
+- Create method for loading and registering command and hooks and add to `plugins.rb`
+- Bundle "next" lockfile on plugin install, removing the need to `bundle` twice
+
 ## 0.1.2
 - Fix helper method
 

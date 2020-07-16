@@ -20,7 +20,7 @@ And then execute:
 
 ## Usage
 
-The plugin is installed with an initial `bundle`. Then, every subsequent `bundle` will install all gems from both `Gemfile.lock` and `Gemfile_next.lock`.
+The plugin is installed with `bundle install`. It will also install all gems from both `Gemfile.lock` and `Gemfile_next.lock` on the initial `bundle` and every subsequent one as well.
 
 _NOTE_: This plugin does not generate a `Gemfile_next.lock`, keep both lockfiles in sync over gem bumps, nor does it implement any strategy for bifurcating the `Gemfile` to load different gems. For those reasons, this plugin pairs really well with [`bootboot`](https://github.com/Shopify/bootboot). For more info on dual booting I recommend reading its `README`.
 
