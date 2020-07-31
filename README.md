@@ -1,4 +1,4 @@
-# DoubleTake
+# DoubleTake :eyes::eyes:
 
 DoubleTake is a [bundler plugin](https://bundler.io/v2.0/guides/bundler_plugins.html) that doubly bundles gems from multiple lockfiles for projects that are using a [dual boot strategy](https://www.youtube.com/watch?v=I-2Xy3RS1ns&t=368s).
 
@@ -12,7 +12,7 @@ Add this line to your application's Gemfile:
 plugin "double_take"
 ```
 
-_NOTE_: We use the `plugin` method, not `gem`.
+_NOTE_: We use the `plugin` method, not `gem`. Did you do a ...double take? (I promise there won't be any more jokes)
 
 And then execute:
 
@@ -22,9 +22,9 @@ And then execute:
 
 The plugin is installed with `bundle install`. It will also install all gems from both `Gemfile.lock` and `Gemfile_next.lock` on the initial `bundle` and every subsequent one as well.
 
-_NOTE_: This plugin does not generate a `Gemfile_next.lock`, keep both lockfiles in sync over gem bumps, nor does it implement any strategy for bifurcating the `Gemfile` to load different gems. For those reasons, this plugin pairs really well with [`bootboot`](https://github.com/Shopify/bootboot). For more info on dual booting I recommend reading its `README`.
+_NOTE_: This plugin does not generate a `Gemfile_next.lock`, keep both lockfiles in sync over gem bumps, nor does it implement any strategy for bifurcating the `Gemfile` to load different gems. For those reasons, this plugin pairs really well with [`bootboot`](https://github.com/Shopify/bootboot). For more info on dual booting I recommend reading the `README`.
 
-As mentioned in the `bootboot` plugin the `Gemfile` needs to be bifurcated with the environment variable `DEPENDENCIES_NEXT`.
+As mentioned in the `bootboot` plugin the `Gemfile` needs to be bifurcated with the environment variable `DEPENDENCIES_NEXT`. As of now, this library does not support custom environment variables.
 
 
 ### Clean
