@@ -24,8 +24,8 @@ module DoubleTake
       end
     end
 
-    def bundle_next(unlock = EMPTY_UNLOCK)
-      return if ENV["DEPENDENCIES_NEXT"] || !GEMFILE_NEXT_LOCK.file?
+    def bundle_next(unlock = EMPTY_UNLOCK, next_lockfile = GEMFILE_NEXT_LOCK)
+      return if ENV["DEPENDENCIES_NEXT"] || !next_lockfile.file?
 
       # this method memoizes an instance of the current definition
       # so we need to fill that cache for other bundler internals to use
@@ -33,7 +33,7 @@ module DoubleTake
 
       DoubleTake.with_dependency_next do
         next_definition = Bundler::Definition
-          .build(GEMFILE, GEMFILE_NEXT_LOCK, unlock)
+          .build(GEMFILE, next_lockfile, unlock)
 
         Bundler.ui.confirm("Installing bundle for NEXT")
 
