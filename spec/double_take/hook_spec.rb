@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "bundler"
-require "climate_control"
-
 RSpec.describe DoubleTake::Hook do
   describe "#bundle_next" do
     let(:definition) { instance_double(Bundler::Definition) }
