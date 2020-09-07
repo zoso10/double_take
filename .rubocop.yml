@@ -1,0 +1,40 @@
+AllCops:
+  NewCops: enable
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Metrics/BlockLength:
+  Exclude:
+  - spec/**/*.rb
+  - double_take.gemspec
+
+Metrics/MethodLength:
+  Max: 15
+
+Style/CommandLiteral:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/ExpandPathArguments:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/NegatedIf:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma

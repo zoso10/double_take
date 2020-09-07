@@ -10,7 +10,7 @@ module DoubleTake
                else
                  requested_dependencies
                end
-        next_specs = Bundler::Definition
+        Bundler::Definition
           .build(GEMFILE, GEMFILE_NEXT_LOCK, nil)
           .resolve
           .materialize(deps)

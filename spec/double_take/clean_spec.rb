@@ -53,7 +53,7 @@ RSpec.describe DoubleTake::Clean do
 
         expect(Bundler::CLI::Clean).to have_received(:new).with(
           "dry-run": true,
-          "force": true,
+          "force": true
         )
         expect(clean).to have_received(:run)
       end

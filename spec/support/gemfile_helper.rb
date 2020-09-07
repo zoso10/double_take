@@ -22,7 +22,7 @@ module GemfileHelper
   def with_gemfile(content: nil)
     dir = Dir.mktmpdir
     file = Tempfile.new("Gemfile", dir).tap do |f|
-      f.write (content || <<~GEMFILE)
+      f.write(content || <<~GEMFILE)
         source "https://rubygems.org"
 
         #{plugin}
@@ -59,7 +59,7 @@ module GemfileHelper
         "bundle _#{bundler_version}_ #{command} #{flag}"
       )
 
-      raise RuntimeError, "bundle #{command} failed: #{output}" unless status.success?
+      raise "bundle #{command} failed: #{output}" unless status.success?
     end
     output
   end

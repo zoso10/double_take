@@ -99,17 +99,17 @@ RSpec.describe DoubleTake do
 
         # The versions are backwards with what you'd expect for "Next",
         # but that's not what we're testing here so it's fine
-        version = Bundler::Definition.
-          build(file.path, "#{file.path}.lock", DoubleTake::Hook::EMPTY_UNLOCK).
-          locked_deps["rake"].
-          requirement.
-          to_s
+        version = Bundler::Definition
+          .build(file.path, "#{file.path}.lock", DoubleTake::Hook::EMPTY_UNLOCK)
+          .locked_deps["rake"]
+          .requirement
+          .to_s
         expect(version).to eq("= 13.0.1")
-        next_version = Bundler::Definition.
-          build(file.path, "#{file.path}_next.lock", DoubleTake::Hook::EMPTY_UNLOCK).
-          locked_deps["rake"].
-          requirement.
-          to_s
+        next_version = Bundler::Definition
+          .build(file.path, "#{file.path}_next.lock", DoubleTake::Hook::EMPTY_UNLOCK)
+          .locked_deps["rake"]
+          .requirement
+          .to_s
         expect(next_version).to eq("= 12.3.3")
 
         output = bundle_clean(file.path)
