@@ -125,7 +125,7 @@ RSpec.describe DoubleTake do
 
         output = bundle_clean(file.path, flag: "--help")
 
-        expect(output).to start_with("Usage:\n  bundle clean [OPTIONS]")
+        expect(output).to include("Cleans up unused gems in your bundler directory")
       end
     end
   end
