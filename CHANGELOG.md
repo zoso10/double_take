@@ -1,5 +1,9 @@
 # double_take
 
+## 0.2.1 (unreleased)
+- Added rubocop and fixed violations
+- Added running test suite against bundler version 1.17.x to 2.1.x in CI
+
 ## 0.2.0
 - Remove registering command and hooks at file loadtime
 - Create method for loading and registering command and hooks and add to `plugins.rb`

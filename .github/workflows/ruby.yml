@@ -9,7 +9,7 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, te-test ]
   pull_request:
     branches: [ master ]
 
@@ -27,7 +27,26 @@ jobs:
       uses: ruby/setup-ruby@ec106b438a1ff6ff109590de34ddc62c540232e0
       with:
         ruby-version: 2.6
+
     - name: Install dependencies
       run: bundle install
-    - name: Run tests
-      run: bundle exec rake
+
+    # Unfortunately, we can't use the `appraisal` gem and need to manually
+    # install each bundler version we want to test with.
+    - name: Install bundler v1.17.x
+      run: gem install bundler -v "~> 1.17.0"
+
+    - name: Run tests with bundler v1.17.x
+      run: TEST_BUNDLER_VERSION=1.17 bundle exec rake
+
+    - name: Install bundler v2.0.x
+      run: gem install bundler -v "~> 2.0.0"
+
+    - name: Run tests with bundler v2.0.x
+      run: bundle update --bundler && TEST_BUNDLER_VERSION=2.0 bundle exec rake
+
+    - name: Install bundler v2.1.x
+      run: gem install bundler -v "~> 2.1.0"
+
+    - name: Run tests with bundler v2.1.x
+      run: bundle update --bundler && TEST_BUNDLER_VERSION=2.1 bundle exec rake

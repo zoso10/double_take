@@ -1,4 +1,4 @@
-# DoubleTake :eyes::eyes:
+# DoubleTake :eyes: :eyes:
 
 DoubleTake is a [bundler plugin](https://bundler.io/v2.0/guides/bundler_plugins.html) that doubly bundles gems from multiple lockfiles for projects that are using a [dual boot strategy](https://www.youtube.com/watch?v=I-2Xy3RS1ns&t=368s).
 
@@ -22,9 +22,9 @@ And then execute:
 
 The plugin is installed with `bundle install`. It will also install all gems from both `Gemfile.lock` and `Gemfile_next.lock` on the initial `bundle` and every subsequent one as well.
 
-_NOTE_: This plugin does not generate a `Gemfile_next.lock`, keep both lockfiles in sync over gem bumps, nor does it implement any strategy for bifurcating the `Gemfile` to load different gems. For those reasons, this plugin pairs really well with [`bootboot`](https://github.com/Shopify/bootboot). For more info on dual booting I recommend reading the `README`.
+_NOTE_: This plugin does not generate a `Gemfile_next.lock`, keep both lockfiles in sync over gem bumps, nor does it implement any strategy for bifurcating the `Gemfile` to load different gems. For those reasons, this plugin pairs really well with [`bootboot`](https://github.com/Shopify/bootboot). For more info on dual booting I recommend reading the `README` for `bootboot`.
 
-As mentioned in the `bootboot` plugin the `Gemfile` needs to be bifurcated with the environment variable `DEPENDENCIES_NEXT`. As of now, this library does not support custom environment variables.
+As mentioned in the `bootboot` plugin the `Gemfile` needs to be bifurcated with the environment variable `DEPENDENCIES_NEXT`. As of now, this library does not support custom environment variables for bifurcating.
 
 
 ### Clean
@@ -39,11 +39,22 @@ It accepts all options that bundler's clean command does:
     $ bundle double_take clean --force
 
 
+### Supported Versions
+This plugin is intended to be used with `bundler` versions 1.17.x to 2.1.x. The test suite is run against 1.17.x, 2.0.x, and 2.1.x in CI.
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+
+### Testing Versions
+To run the test suite against a specific version of bundler you can use the `TEST_BUNDLER_VERSION` environment variable. It supports full versions ie. `1.17.3` or abbreviated minor level versions ie. `2.0` and will choose the latest patch version. If a version is not specified the default bundler version will be used. This can all be verified with output that is printed before the spec suite runs.
+
+Because of the backward incompatibilities between versions 1.x and 2.x you will have to run `bundle update --bundler` to properly test for 2.x versions. Please do not commit the changed `Gemfile.lock` if you are contributing code.
+
 
 ## Contributing
 
