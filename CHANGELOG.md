@@ -1,6 +1,6 @@
 # double_take
 
-## 0.2.1 (unreleased)
+## 0.2.1
 - Added rubocop and fixed violations
 - Added running test suite against bundler version 1.17.x to 2.1.x in CI
 - Fixed bundler method deprecation warning
