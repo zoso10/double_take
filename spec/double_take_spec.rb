@@ -67,7 +67,7 @@ RSpec.describe DoubleTake do
       end
     end
 
-    it "doesn't bundle Next when DEPENDENCIES_NEXT env var is set" do
+    it "doesn't doubly bundle when DEPENDENCIES_NEXT env var is set" do
       with_gemfile do |file|
         bundle_install(file.path)
         FileUtils.cp("#{file.path}.lock", "#{file.path}_next.lock")
@@ -80,6 +80,17 @@ RSpec.describe DoubleTake do
   end
 
   describe "`bundle clean` behaviour" do
+    it "supports `clean` subcommand flags" do
+      with_gemfile do |file|
+        bundle_install(file.path)
+        FileUtils.cp("#{file.path}.lock", "#{file.path}_next.lock")
+
+        output = bundle_clean(file.path, flag: "--dry-run")
+
+        expect(output).to include("Would have removed")
+      end
+    end
+
     it "keeps gems in both lockfiles" do
       multiple_versions = <<~GEMFILE
         source "https://rubygems.org"
@@ -116,16 +127,6 @@ RSpec.describe DoubleTake do
 
         expect(output).not_to include("rake (13.0.1)")
         expect(output).not_to include("rake (12.3.3)")
-      end
-    end
-
-    it "supports `clean` subcommand flags" do
-      with_gemfile do |file|
-        bundle_install(file.path)
-
-        output = bundle_clean(file.path, flag: "--help")
-
-        expect(output).to include("Cleans up unused gems in your bundler directory")
       end
     end
   end
